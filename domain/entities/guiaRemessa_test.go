@@ -2,11 +2,16 @@ package guiaremessa_test
 
 import "testing"
 
-func TestarNewGuiaremessa(*testing.T) {
-	// o  meu arrange
+func TestGuiaremessa(t *testing.T) {
 
-	// o meu assert
+	t.Run("gerar guia remessas", func(t *testing.T) {
 
-	// o meu act
+		// o  meu arrange
+
+		// o meu assert
+
+		// o meu act
+	})
+	
 
 }
