@@ -1,0 +1,49 @@
+<mxfile host="65bd71144e">
+    <diagram id="ywwP6c4tokRCVMQ7xgE5" name="Page-1">
+        <mxGraphModel dx="2830" dy="1665" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="119" value="" style="whiteSpace=wrap;html=1;aspect=fixed;container=1;" parent="1" vertex="1">
+                    <mxGeometry x="-1340" y="-690" width="1750" height="1750" as="geometry"/>
+                </mxCell>
+                <mxCell id="5" value="Mercadoria Devolvida" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" parent="119" vertex="1">
+                    <mxGeometry x="910" y="440" width="130" height="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="Devolver Mercadoria" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="119" vertex="1">
+                    <mxGeometry x="740" y="445" width="140" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Expedir Mercadoria" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" parent="119" vertex="1">
+                    <mxGeometry x="200" y="445" width="110" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&lt;font color=&quot;#111311&quot;&gt;Guia de Remessa&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffff88;strokeColor=#36393d;" parent="119" vertex="1">
+                    <mxGeometry x="320" y="425" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="Receber Mercadoria" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;fontColor=#ffffff;strokeColor=#006EAF;" parent="119" vertex="1">
+                    <mxGeometry x="200" y="245" width="110" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="112" value="&lt;font color=&quot;#0e0707&quot;&gt;Utiizador&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="119" vertex="1">
+                    <mxGeometry x="190" y="295" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="118" value="&lt;font color=&quot;#0e0707&quot;&gt;Utilizador&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="119" vertex="1">
+                    <mxGeometry x="160" y="485" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="115" value="&lt;font color=&quot;#0e0707&quot;&gt;Utilizador&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" parent="119" vertex="1">
+                    <mxGeometry x="740" y="500" width="60" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="17" value="Devolver mercadoria com validade &amp;lt;30 dias" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="119" vertex="1">
+                    <mxGeometry x="590" y="435" width="140" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="162" value="&lt;font color=&quot;#111311&quot;&gt;Guia de Remessa&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffff88;strokeColor=#36393d;" vertex="1" parent="119">
+                    <mxGeometry x="320" y="225" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="Mercadoria Expedida" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" parent="119" vertex="1">
+                    <mxGeometry x="450" y="445" width="130" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="2" value="Mercadoria Recebida" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" parent="119" vertex="1">
+                    <mxGeometry x="450" y="235" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>
