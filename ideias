@@ -1,0 +1,50 @@
+func TestInMemoryUserRepository(t *testing.T) {
+	repo := NewInMemoryUserRepository()
+
+	// Teste de criação de usuário
+	user, err := repo.CreateUser(User{Name: "John Doe", Email: "john.doe@example.com"})
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
+	}
+	if user.ID == 0 {
+		t.Fatalf("Expected non-zero ID, got %d", user.ID)
+	}
+
+	// Teste de obtenção de usuário pelo ID
+	fetchedUser, err := repo.GetUserByID(user.ID)
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
+	}
+	if fetchedUser != user {
+		t.Fatalf("Expected user %v, got %v", user, fetchedUser)
+	}
+
+	// Teste de atualização de usuário
+	user.Name = "John Smith"
+	updatedUser, err := repo.UpdateUser(user)
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
+	}
+	if updatedUser.Name != "John Smith" {
+		t.Fatalf("Expected name John Smith, got %s", updatedUser.Name)
+	}
+
+	// Teste de deleção de usuário
+	err = repo.DeleteUser(user.ID)
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
+	}
+	_, err = repo.GetUserByID(user.ID)
+	if err == nil {
+		t.Fatalf("Expected error, got nil")
+	}
+
+	// Teste de obtenção de todos os usuários
+	users, err := repo.GetAllUsers()
+	if err != nil {
+		t.Fatalf("Expected no error, got %v", err)
+	}
+	if len(users) != 0 {
+		t.Fatalf("Expected 0 users, got %d", len(users))
+	}
+}

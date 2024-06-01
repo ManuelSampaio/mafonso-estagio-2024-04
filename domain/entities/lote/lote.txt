@@ -1,0 +1,19 @@
+Id: lt001
+Produto: {Id:001, Nome: pao, DataValidade: 2024-05-01}
+Quantidade: 900,
+DataValidade: 2024-04-01
+
+Id: lt002
+Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
+Quantidade: 900,
+DataValidade: 2024-06-01
+
+Id: lt003
+Produto: {Id:002, Nome: pao2, DataValidade: 2024-04-01}
+Quantidade: 900,
+DataValidade: 2024-04-01
+
+Id: lt004
+Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
+Quantidade: 900,
+DataValidade: 2024-06-01
