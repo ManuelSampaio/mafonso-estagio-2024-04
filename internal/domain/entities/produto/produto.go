@@ -7,8 +7,9 @@ type Produto struct {
 }
 
 func (p *Produto) New(i, n, d string) *Produto {
-	p.id = i
-	p.nome = n
-	p.dataValidade = d
-	return p
+	return &Produto{
+		   id: i,
+		   nome: n,
+		   dataValidade: d,
+	}
 }

@@ -11,11 +11,12 @@ type GuiaRemessa struct {
 }
 
 func (g *GuiaRemessa) New(i string, p produto.Produto, q int) *GuiaRemessa{
-	g.id =i
-	g.produtos = p
-	g.quantidade = q
 
-	return g
+	return &GuiaRemessa{
+		id: i,
+		produtos: p,
+		quantidade: q,
+	}
 }
 
 func (g GuiaRemessa) Id() string{
