@@ -1,7 +1,7 @@
 package guiaremessa
 
 import (
-	produto "Acme/domain/entities/produto"
+	produto "ACMELDA/internal/domain/entities/produto"
 )
 
 type GuiaRemessa struct {

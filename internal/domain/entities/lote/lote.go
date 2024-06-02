@@ -1,7 +1,7 @@
 package lote
 
 import (
-	produto "Acme/domain/entities/produto"
+	produto "ACMELDA/internal/domain/entities/produto"
 	"fmt"
 	"io/ioutil"
 	"strings"
