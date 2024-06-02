@@ -5,7 +5,19 @@ import (
 )
 
 type GuiaRemessa struct {
-	Id         string
-	Produtos   produto.Produto
-	Quantidade int
+	id         string
+	produtos   produto.Produto
+	quantidade int
+}
+
+func (g *GuiaRemessa) New(i string, p produto.Produto, q int) *GuiaRemessa{
+	g.id =i
+	g.produtos = p
+	g.quantidade = q
+
+	return g
+}
+
+func (g GuiaRemessa) Id() string{
+	return g.id
 }

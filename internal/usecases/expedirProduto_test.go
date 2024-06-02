@@ -10,22 +10,17 @@ func testExpedirMercadoria(t *testing.T){
 
 	t.Run("se guia de remessa foi criada", func(t *testing.T){
 		// arrange
-		p:= produto.Produto{
-				 Id: "001",
-				 Nome: " Pao",
-				DataValidade: "2024-06-12", 
-		}
-
+		p:= produto.Produto{}
 		
+		p.New("001", "Pao", "2024-06-12")
+
 		// act
-		g:= guia.GuiaRemessa{
-			Id: "g001",         
-			Produtos: p,
-			Quantidade: 100,
-		}
+		g:= guia.GuiaRemessa{}
+
+		g.New("g001", p, 100)
 		// assert
 
-		if g.Id == "" {
+		if g.Id() == "" {
 			t.Fail()
 		}
 
