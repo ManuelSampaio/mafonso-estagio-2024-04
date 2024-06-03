@@ -1,24 +1,37 @@
-package guiaremessa
+package guiaRemessa
 
 import (
-	produto "ACMELDA/internal/domain/entities/produto"
+    "time"
 )
 
 type GuiaRemessa struct {
-	id         string
-	produtos   produto.Produto
-	quantidade int
+    ID            string
+    PedidoID      string
+    Quantidade    int
+    DataExpedicao time.Time
 }
 
-func (g *GuiaRemessa) New(i string, p produto.Produto, q int) *GuiaRemessa{
-
-	return &GuiaRemessa{
-		id: i,
-		produtos: p,
-		quantidade: q,
-	}
+func NewGuiaRemessa(id, pedidoID string, quantidade int) *GuiaRemessa {
+    return &GuiaRemessa{
+        ID:            id,
+        PedidoID:      pedidoID,
+        Quantidade:    quantidade,
+        DataExpedicao: time.Now(),
+    }
 }
 
-func (g GuiaRemessa) Id() string{
-	return g.id
+func (g *GuiaRemessa) GetID() string {
+    return g.ID
+}
+
+func (g *GuiaRemessa) GetPedidoID() string {
+    return g.PedidoID
+}
+
+func (g *GuiaRemessa) GetDataExpedicao() time.Time {
+    return g.DataExpedicao
+}
+
+func (g *GuiaRemessa) GetQuantidade() int {
+    return g.Quantidade
 }

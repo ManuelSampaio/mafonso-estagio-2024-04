@@ -1,66 +1,59 @@
 package expedirProduto_test
 
 import (
-		"testing"
-		"fmt"
-		produto "ACMELDA/internal/domain/entities/produto"
-		guia  "ACMELDA/internal/domain/aggregates/guiaRemessa"
-		repositorio "ACMELDA/internal/domain/repository/guiaRemessaRepository"
+    "testing"
+    "fmt"
+    "ACMELDA/internal/domain/aggregates/guiaRemessa"
+    "ACMELDA/internal/domain/repository/guiaRemessaRepository"
 )
 
-func testExpedirMercadoria(t *testing.T){
+func TestExpedirMercadoria(t *testing.T) {
 
-	t.Run("se guia de remessa foi criada", func(t *testing.T){
-		// arrange
-		p:= produto.Produto{}
-		
-		p.New("001", "Pao", "2024-06-12")
+    t.Run("se guia de remessa foi criada", func(t *testing.T) {
+        // arrange
+        pedidoID := "001"
+        quantidade := 100
 
-		// act
-		g:= guia.GuiaRemessa{}
+        // act
+        g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
 
-		g.New("g001", p, 100)
-		// assert
+        // assert
+        if g.GetID() == "" {
+            t.Fail()
+        }
+    })
 
-		if g.Id() == "" {
-			t.Fail()
-		}
+    t.Run("se repositorio guia de remessa foi criada", func(t *testing.T) {
+        // arrange
+        pedidoID := "001"
+        quantidade := 100
+        g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
+        r := guiaRemessaRepository.New()
 
-	} )
+        // act
+        r.CriarGuia(g)
 
-	t.Run("se repositorio guia de remessa foi criada", func(t *testing.T){
-		// arrange
-		p:= produto.Produto{}
-		g:= guia.GuiaRemessa{}
-		r := repositorio.New()
-		p.New("001", "Pao", "2024-06-12")
-		g.New("g001", p, 100)
-		// act
-		gr:= r. CriarRepositorioGuia(&g)
-		// assert
-		if gr.Id() == "" {
-			t.Fail()
-		}
+        // assert
+        if g.GetID() == "" {
+            t.Fail()
+        }
+    })
 
-	} )
+    t.Run("recuperar um agregado de guia remessa", func(t *testing.T) {
+        // arrange
+        pedidoID := "001"
+        quantidade := 100
+        g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
+        r := guiaRemessaRepository.New()
+        r.CriarGuia(g)
 
-	t.Run("recuperar um agregado de guia remessa", func(t *testing.T){
-			// arrange
-			p:= produto.Produto{}
-			g:= guia.GuiaRemessa{}
-			r := repositorio.New()
-			p.New("001", "Pao", "2024-06-12")
-			g.New("g001", p, 100)
-			r. CriarRepositorioGuia(&g)
+        // act
+        gr, err := r.RecuperarGuia("g001")
 
-			// act 
-			gr:= r.RecuperarRepositorioGuia(1)
-
-			// assert
-			if gr != nil {
-				fmt.Println(gr)
-				t.Fail()
-			}
-	} )
+        // assert
+        if err != nil || gr == nil {
+            t.Fatalf("Erro ao recuperar guia de remessa: %v", err)
+        }
+        fmt.Println(gr)
+    })
 }
-

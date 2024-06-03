@@ -1,44 +1,26 @@
-package guiaRemessarepository
+package guiaRemessaRepository
 
 import (
-      guia  "ACMELDA/internal/domain/aggregates/guiaRemessa"
-      "sync"
+    "ACMELDA/internal/domain/aggregates/guiaRemessa"
+    "errors"
 )
 
 type GuiaRemessaRepository struct {
-    guias  map[int] *guia.GuiaRemessa
-    nextId int
-    mutex sync.Mutex
+    guias map[string]*guiaRemessa.GuiaRemessa
 }
 
-func New() * GuiaRemessaRepository {
+func New() *GuiaRemessaRepository {
+    return &GuiaRemessaRepository{guias: make(map[string]*guiaRemessa.GuiaRemessa)}
+}
 
-    return &GuiaRemessaRepository{
-        guias: make(map[int] *guia.GuiaRemessa),
-        nextId: 1,
+func (r *GuiaRemessaRepository) CriarGuia(g *guiaRemessa.GuiaRemessa) {
+    r.guias[g.GetID()] = g
+}
+
+func (r *GuiaRemessaRepository) RecuperarGuia(id string) (*guiaRemessa.GuiaRemessa, error) {
+    g, existe := r.guias[id]
+    if !existe {
+        return nil, errors.New("guia de remessa não encontrada")
     }
-}
-
-func (repo *GuiaRemessaRepository) CriarRepositorioGuia(guia *guia.GuiaRemessa) (*guia.GuiaRemessa){
-    repo.mutex.Lock()
-	defer repo.mutex.Unlock()
-
-	id := repo.nextId
-	repo.nextId++
-	repo.guias[id] = guia
-	return guia
-}
-
-func (repo *GuiaRemessaRepository) RecuperarRepositorioGuia(id int) (*guia.GuiaRemessa){
-
-    repo.mutex.Lock()
-	defer repo.mutex.Unlock()
-
-    guia, exists := repo.guias[id]
-    
-	if !exists {
-		return nil
-    }
-    
-	return guia
+    return g, nil
 }
