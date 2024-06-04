@@ -148,7 +148,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
 
 		// assert
 		if lote == -1 {
@@ -166,7 +166,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
 
 		// assert
 		if lote != -1 {
@@ -184,7 +184,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
 
 		// assert
 		if lote != -1 {

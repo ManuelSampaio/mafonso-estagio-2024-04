@@ -48,7 +48,6 @@ func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 func (l Lote) RetirarProdutoNoLote(lotes []Lote, quantidade int) int {
 
 	unidadeSubstituta := quantidade
-	//naoConseguiuRetirarUnidades := -9999
 
 	for _, lote := range lotes {
 		fmt.Println(" O LOTE QUE DSCONCTOU Principio: ", lote)
@@ -63,7 +62,6 @@ func (l Lote) RetirarProdutoNoLote(lotes []Lote, quantidade int) int {
 			lote.Quantidade -= lote.Quantidade
 			fmt.Println(" FIM LOte: ", lote)
 		}
-		//fmt.Println(" O LOTE QUE DSCONCTOU: ", lote)
 	}
 
 	return -1
