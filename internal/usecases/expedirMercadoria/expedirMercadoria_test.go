@@ -1,9 +1,11 @@
-package expedirProduto_test
+package expedirMercadoria_test
 
 import (
 	"ACMELDA/internal/domain/aggregates/guiaRemessa"
 	"ACMELDA/internal/domain/entities/lote"
 	"ACMELDA/internal/domain/repository/guiaRemessaRepository"
+	expedirMercadoria "ACMELDA/internal/usecases/expedirMercadoria"
+	"fmt"
 	"testing"
 )
 
@@ -208,4 +210,24 @@ func TestExpedirMercadoria(t *testing.T) {
 		}
 
 	})
+
+	t.Run("expedir mercadoria", func(t *testing.T) {
+		// arrange
+		expedir := expedirMercadoria.ExpedirMercadoria{}
+		idProduto := "003"
+		quantidade := 200
+		g := guiaRemessa.NewGuiaRemessa("g002", idProduto, quantidade)
+
+		// act
+
+		expedir.Executa(g)
+
+		// assert
+		if expedir.Executa(g) {
+			fmt.Println(" aiiiiii")
+			t.Fail()
+		}
+
+	})
+
 }

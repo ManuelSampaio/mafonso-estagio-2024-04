@@ -1,37 +1,37 @@
 package guiaRemessa
 
 import (
-    "time"
+	"time"
 )
 
 type GuiaRemessa struct {
-    ID            string
-    PedidoID      string
-    Quantidade    int
-    DataExpedicao time.Time
+	id            string
+	pedidoID      string
+	quantidade    int
+	dataExpedicao time.Time
 }
 
 func NewGuiaRemessa(id, pedidoID string, quantidade int) *GuiaRemessa {
-    return &GuiaRemessa{
-        ID:            id,
-        PedidoID:      pedidoID,
-        Quantidade:    quantidade,
-        DataExpedicao: time.Now(),
-    }
+	return &GuiaRemessa{
+		id:            id,
+		pedidoID:      pedidoID,
+		quantidade:    quantidade,
+		dataExpedicao: time.Now(),
+	}
 }
 
 func (g *GuiaRemessa) GetID() string {
-    return g.ID
+	return g.id
 }
 
 func (g *GuiaRemessa) GetPedidoID() string {
-    return g.PedidoID
+	return g.pedidoID
 }
 
 func (g *GuiaRemessa) GetDataExpedicao() time.Time {
-    return g.DataExpedicao
+	return g.dataExpedicao
 }
 
 func (g *GuiaRemessa) GetQuantidade() int {
-    return g.Quantidade
+	return g.quantidade
 }

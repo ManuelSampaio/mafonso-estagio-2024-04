@@ -1,11 +1,27 @@
-package expedirProduto
+package expedirMercadoria
 
 import (
-    "ACMELDA/internal/domain/aggregates/guiaRemessa"
-    "ACMELDA/internal/domain/repository/guiaRemessaRepository"
+	"ACMELDA/internal/domain/aggregates/guiaRemessa"
+	"ACMELDA/internal/domain/entities/lote"
 )
 
-type ExpedirProdutoInput struct {
+type ExpedirMercadoria struct {
+	//guia guiaRemessa.GuiaRemessa
+	lote lote.Lote
+}
+
+func (e ExpedirMercadoria) Executa(g *guiaRemessa.GuiaRemessa) bool {
+	lotes := e.lote.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+	returou := e.lote.RetirarProdutoNoLote(lotes, g.GetQuantidade())
+
+	if returou != -1 {
+		return true
+	}
+
+	return false
+}
+
+/*type ExpedirProdutoInput struct {
     ID        string
     PedidoID  string
     Quantidade int
@@ -38,6 +54,4 @@ func (uc *ExpedirProdutoUseCase) Execute(input ExpedirProdutoInput) (*ExpedirPro
         Quantidade:   guia.GetQuantidade(),
         DataExpedicao: guia.GetDataExpedicao().String(),
     }, nil
-}
-
-
+}*/
