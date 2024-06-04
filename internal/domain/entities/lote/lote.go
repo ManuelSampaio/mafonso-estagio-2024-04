@@ -29,6 +29,7 @@ func NewLote() *Lote {
 func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 	Dadoslotes := l.lerDadosArquivo()
 	lotes := l.converteEmStruct(Dadoslotes)
+	//fmt.Println("DAdOSLOTES: ",Dadoslotes)
 	var loteaulixiar []Lote
 
 	for _, lote := range lotes {
@@ -41,6 +42,7 @@ func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 		}
 
 	}
+	fmt.Println("Antes de Sair: ",loteaulixiar)
 	return loteaulixiar
 
 }
@@ -81,9 +83,10 @@ func (l Lote) lerDadosArquivo() string {
 			fmt.Println("Erro ao voltar ao diretório de trabalho:", err)
 		}
 	}()
-
+	//fmt.Println("O DIR ATUAL:", dir)
 	nomeArquivo := "lote.txt"
-	novoDir := filepath.Join(dir, "..", "domain", "entities", "lote")
+	novoDir := filepath.Join(dir, "..", "..", "infrastructure", "files")
+	//novoDir := filepath.Join(dir, "..", "domain", "entities", "lote")
 	err = os.Chdir(novoDir)
 
 	if err != nil {
@@ -97,12 +100,12 @@ func (l Lote) lerDadosArquivo() string {
 		return ""
 	}
 	novoDir = ""
-
+ //fmt.Print("OS DADOS DO FICHEIRO: ", dados)
 	return string(dados)
 }
 
 func (l Lote) converteEmStruct(dados string) []Lote {
-
+	fmt.Print("OS DADOS DO FICHEIRO ANTES DE CONVERTER: ", dados)
 	blocos := strings.Split(dados, "\n\n")
 	loteMap := make(map[int]Lote)
 	idLote := 1
@@ -147,5 +150,6 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 		lotes = append(lotes, lote)
 	}
 
+	fmt.Print("OS DADOS DO FICHEIRO DEPOIS DE CONVERTER: ", lotes)
 	return lotes
 }
