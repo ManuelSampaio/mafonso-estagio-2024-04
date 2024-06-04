@@ -6,14 +6,29 @@ DataValidade: 2024-04-01
 Id: lt002
 Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
 Quantidade: 900,
-DataValidade: 2024-06-01
+DataValidade: 2024-09-01
 
 Id: lt003
 Produto: {Id:002, Nome: pao2, DataValidade: 2024-04-01}
 Quantidade: 900,
-DataValidade: 2024-04-01
+DataValidade: 2024-11-01
 
 Id: lt004
 Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
-Quantidade: 900,
-DataValidade: 2024-06-01
+Quantidade: 500,
+DataValidade: 2024-07-01
+
+Id: lt005
+Produto: {Id:005, Nome: pao5, DataValidade: 2024-10-21}
+Quantidade: 800,
+DataValidade: 2024-11-01
+
+Id: lt006
+Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
+Quantidade: 100,
+DataValidade: 2024-07-01
+
+Id: lt007
+Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
+Quantidade: 100,
+DataValidade: 2024-11-01

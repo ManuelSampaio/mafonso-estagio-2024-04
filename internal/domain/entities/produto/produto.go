@@ -6,10 +6,14 @@ type Produto struct {
 	dataValidade string
 }
 
-func (p *Produto) New(i, n, d string) *Produto {
+func New(i, n, d string) *Produto {
 	return &Produto{
-		   id: i,
-		   nome: n,
-		   dataValidade: d,
+		id:           i,
+		nome:         n,
+		dataValidade: d,
 	}
+}
+
+func (p Produto) GetId() string {
+	return p.id
 }

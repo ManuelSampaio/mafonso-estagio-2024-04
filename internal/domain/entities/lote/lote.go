@@ -4,10 +4,10 @@ import (
 	produto "ACMELDA/internal/domain/entities/produto"
 	"fmt"
 	"io/ioutil"
-	"strings"
-	"strconv"
 	"os"
 	"path/filepath"
+	"strconv"
+	"strings"
 )
 
 type Lote struct {
@@ -17,35 +17,64 @@ type Lote struct {
 	DataValidade string
 }
 
-func (l Lote) RetornaTodosLotes() {
-	lotes := l.lerDadosArquivo()
-	lot := l.converteEmStruct(lotes)
-	fmt.Println("---- Ler Dados: ",lot)
+func NewLote() *Lote {
+	return &Lote{
+		Id:           "",
+		Produto:      produto.Produto{},
+		Quantidade:   0,
+		DataValidade: "",
+	}
+}
+
+func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
+	Dadoslotes := l.lerDadosArquivo()
+	lotes := l.converteEmStruct(Dadoslotes)
+	var loteaulixiar []Lote
+
+	for _, lote := range lotes {
+		auxiliar1, _ := strconv.Atoi(lote.Produto.GetId())
+		auxiliar2, _ := strconv.Atoi(idproduto)
+
+		if auxiliar1 == auxiliar2 && DataValidadeProxima(lote.DataValidade) {
+			fmt.Println(" ENCONTREI: ", lote)
+			loteaulixiar = append(loteaulixiar, lote)
+		}
+
+	}
+	return loteaulixiar
 
 }
 
-func  (l Lote) lerDadosArquivo() string {
-    
+func (l Lote) lerDadosArquivo() string {
+
 	dir, err := os.Getwd()
 	if err != nil {
 		fmt.Println("Erro ao obter o diretório de trabalho:", err)
 		return ""
 	}
 
+	defer func() {
+		err = os.Chdir(dir)
+		if err != nil {
+			fmt.Println("Erro ao voltar ao diretório de trabalho:", err)
+		}
+	}()
+
 	nomeArquivo := "lote.txt"
-	novoDir := filepath.Join(dir, "..", "..","domain","entities","lote")
+	novoDir := filepath.Join(dir, "..", "domain", "entities", "lote")
 	err = os.Chdir(novoDir)
+
 	if err != nil {
-		fmt.Println("Erro ao mudar de diretório:", err)
+		fmt.Println("Erro ao mudar de diretório2:", err)
 		return ""
 	}
 
-	// Lê todo o conteúdo do arquivo
-	dados, err := ioutil.ReadFile(novoDir+ "/"+ nomeArquivo)
+	dados, err := ioutil.ReadFile(novoDir + "/" + nomeArquivo)
 	if err != nil {
-		fmt.Println("Erro ao mudar de diretório:", err)
+		fmt.Println("Erro ao ler os dados:", err)
 		return ""
 	}
+	novoDir = ""
 
 	return string(dados)
 }
@@ -54,6 +83,7 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 
 	blocos := strings.Split(dados, "\n\n")
 	loteMap := make(map[int]Lote)
+	idLote := 1
 
 	for _, bloco := range blocos {
 		if bloco != "" {
@@ -67,19 +97,25 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 					switch campos[0] {
 					case "Id":
 						lote.Id = campos[1]
-					/*case "Produto":
-						lote.Produto = campos[1]*/
+					case "Produto":
+						produtoCampos := strings.Split(campos[1], ", ")
+						produtoId, _ := strconv.Atoi(produtoCampos[0][4:])
+						produtoNome := produtoCampos[1][6:]
+						dataValidadeProduto := produtoCampos[2][14:]
+						lote.Produto = *produto.New(strconv.Itoa(produtoId), produtoNome, strings.Replace(dataValidadeProduto, "}", "", 1))
+
 					case "Quantidade":
-						lote.Quantidade, _= strconv.Atoi(campos[1])
+						lote.Quantidade, _ = strconv.Atoi(strings.Replace(campos[1], ",", "", 1))
+
 					case "DataValidade":
-						lote.DataValidade  = campos[1]
+						lote.DataValidade = campos[1]
 					}
 				}
 			}
 
-			idLote, _ := strconv.Atoi(lote.Id)
 			if _, ok := loteMap[idLote]; !ok {
 				loteMap[idLote] = lote
+				idLote += 1
 			}
 		}
 	}
@@ -91,5 +127,3 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 
 	return lotes
 }
-
-
