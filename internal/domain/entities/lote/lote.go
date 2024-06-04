@@ -45,6 +45,30 @@ func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 
 }
 
+func (l Lote) RetirarProdutoNoLote(lotes []Lote, quantidade int) int {
+
+	unidadeSubstituta := quantidade
+	//naoConseguiuRetirarUnidades := -9999
+
+	for _, lote := range lotes {
+		fmt.Println(" O LOTE QUE DSCONCTOU Principio: ", lote)
+		if lote.Quantidade >= unidadeSubstituta && unidadeSubstituta > 0 {
+			lote.Quantidade = lote.Quantidade - unidadeSubstituta
+			fmt.Println(" SERÀ???")
+			return lote.Quantidade
+
+		} else if lote.Quantidade <= unidadeSubstituta && unidadeSubstituta > 0 {
+			fmt.Println(" OOIIIII LOte: ", lote.Id)
+			unidadeSubstituta = unidadeSubstituta - lote.Quantidade
+			lote.Quantidade -= lote.Quantidade
+			fmt.Println(" FIM LOte: ", lote)
+		}
+		//fmt.Println(" O LOTE QUE DSCONCTOU: ", lote)
+	}
+
+	return -1
+}
+
 func (l Lote) lerDadosArquivo() string {
 
 	dir, err := os.Getwd()

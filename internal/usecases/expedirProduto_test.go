@@ -90,6 +90,23 @@ func TestExpedirMercadoria(t *testing.T) {
 
 	})
 
+	t.Run("Não retornar produtos em lotes com data validade já passada", func(t *testing.T) {
+		// arrange
+		pedidoID := "001"
+		quantidade := 30
+		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
+		l := lote.NewLote()
+
+		//act
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+
+		// assert
+		if len(lotes) > 0 {
+			t.Fail()
+		}
+
+	})
+
 	t.Run("buscar um produto que não existe em lotes", func(t *testing.T) {
 		// arrange
 		pedidoID := "103"
@@ -101,7 +118,92 @@ func TestExpedirMercadoria(t *testing.T) {
 		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
 
 		// assert
-		if len(lotes) != 0 {
+		if len(lotes) > 0 {
+			t.Fail()
+		}
+
+	})
+
+	t.Run("encontrar produto em lotes sem dados da guia de remessa", func(t *testing.T) {
+		// arrange
+		g := guiaRemessa.NewGuiaRemessa("", "", 0)
+		l := lote.NewLote()
+
+		//act
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+
+		// assert
+		if len(lotes) > 0 {
+			t.Fail()
+		}
+
+	})
+
+	t.Run("retirar uma determinada quantidade de um produto em lote", func(t *testing.T) {
+		// arrange
+		produtoID := "003"
+		quantidade := 1200
+
+		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
+		l := lote.NewLote()
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		//act
+		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+
+		// assert
+		if lote == -1 {
+			t.Fail()
+		}
+
+	})
+
+	t.Run("retirar quantidade acima de um produto mais do que existe no lote", func(t *testing.T) {
+		// arrange
+		produtoID := "003"
+		quantidade := 2900
+
+		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
+		l := lote.NewLote()
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		//act
+		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+
+		// assert
+		if lote != -1 {
+			t.Fail()
+		}
+
+	})
+
+	t.Run("retirar um produto que não existe no lote", func(t *testing.T) {
+		// arrange
+		produtoID := "103"
+		quantidade := 900
+
+		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
+		l := lote.NewLote()
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		//act
+		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+
+		// assert
+		if lote != -1 {
+			t.Fail()
+		}
+
+	})
+
+	t.Run("retirar um produto sem dados da guia de remessa", func(t *testing.T) {
+		// arrange
+		quantidade := 199
+		g := guiaRemessa.NewGuiaRemessa("", "", 0)
+		l := lote.NewLote()
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		//act
+		lote := l.RetirarProdutoNoLote(lotes, quantidade)
+
+		// assert
+		if lote != -1 {
 			t.Fail()
 		}
 
