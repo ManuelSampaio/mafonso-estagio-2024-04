@@ -13,7 +13,7 @@ func TestReceberMercadoria(t *testing.T) {
 		n := notarecebimento.New("", 0, "")
 
 		//assert
-		if n.Quantidade != 0 {
+		if n.Quantidade() != 0 {
 			t.Fail()
 		}
 	})
@@ -27,7 +27,7 @@ func TestReceberMercadoria(t *testing.T) {
 		n := notarecebimento.New(id, Quantidade, validade)
 
 		//assert
-		if n.Quantidade == 0 {
+		if n.Validade() == "" {
 			t.Fail()
 		}
 	})
