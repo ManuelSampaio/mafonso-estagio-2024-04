@@ -93,4 +93,23 @@ func TestReceberMercadoria(t *testing.T) {
 		}
 
 	})
+
+	t.Run("nota de recebimento sem dado", func(t *testing.T) {
+		//arrange
+
+		//act
+		n := notarecebimento.New("", "", 0, "")
+
+		// assert
+		if n.Quantidade() > 0 {
+			//fmt.Println("NOTA: ", n)
+			t.Fail()
+		}
+
+	})
+	// depois de recebido o produto é armazenado (LOTES: Pratileira-Corredor-Armario)
+	// ao receber : terei o produto, depois irei colocar em uma nota de recebimento,
+	//depois recuperar essa nota (depois de criada, o produto é armazenado em lote)
+
+	// intergarar algumas funcionalidade
 }
