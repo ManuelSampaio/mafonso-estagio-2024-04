@@ -29,7 +29,6 @@ func NewLote() *Lote {
 func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 	Dadoslotes := l.lerDadosArquivo()
 	lotes := l.converteEmStruct(Dadoslotes)
-	//fmt.Println("DAdOSLOTES: ",Dadoslotes)
 	var loteaulixiar []Lote
 
 	for _, lote := range lotes {
@@ -37,12 +36,11 @@ func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 		auxiliar2, _ := strconv.Atoi(idproduto)
 
 		if auxiliar1 == auxiliar2 && DataValidadeProxima(lote.DataValidade) {
-			fmt.Println(" ENCONTREI: ", lote)
 			loteaulixiar = append(loteaulixiar, lote)
 		}
 
 	}
-	fmt.Println("Antes de Sair: ",loteaulixiar)
+
 	return loteaulixiar
 
 }
@@ -52,17 +50,13 @@ func (l Lote) RetirarProdutoNoLote(lotes []Lote, quantidade int) int {
 	unidadeSubstituta := quantidade
 
 	for _, lote := range lotes {
-		fmt.Println(" O LOTE QUE DSCONCTOU Principio: ", lote)
 		if lote.Quantidade >= unidadeSubstituta && unidadeSubstituta > 0 {
 			lote.Quantidade = lote.Quantidade - unidadeSubstituta
-			fmt.Println(" SERÀ???")
 			return lote.Quantidade
 
 		} else if lote.Quantidade <= unidadeSubstituta && unidadeSubstituta > 0 {
-			fmt.Println(" OOIIIII LOte: ", lote.Id)
 			unidadeSubstituta = unidadeSubstituta - lote.Quantidade
 			lote.Quantidade -= lote.Quantidade
-			fmt.Println(" FIM LOte: ", lote)
 		}
 	}
 
@@ -83,10 +77,9 @@ func (l Lote) lerDadosArquivo() string {
 			fmt.Println("Erro ao voltar ao diretório de trabalho:", err)
 		}
 	}()
-	//fmt.Println("O DIR ATUAL:", dir)
+
 	nomeArquivo := "lote.txt"
 	novoDir := filepath.Join(dir, "..", "..", "infrastructure", "files")
-	//novoDir := filepath.Join(dir, "..", "domain", "entities", "lote")
 	err = os.Chdir(novoDir)
 
 	if err != nil {
@@ -100,12 +93,12 @@ func (l Lote) lerDadosArquivo() string {
 		return ""
 	}
 	novoDir = ""
- //fmt.Print("OS DADOS DO FICHEIRO: ", dados)
+
 	return string(dados)
 }
 
 func (l Lote) converteEmStruct(dados string) []Lote {
-	fmt.Print("OS DADOS DO FICHEIRO ANTES DE CONVERTER: ", dados)
+
 	blocos := strings.Split(dados, "\n\n")
 	loteMap := make(map[int]Lote)
 	idLote := 1
@@ -150,6 +143,5 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 		lotes = append(lotes, lote)
 	}
 
-	fmt.Print("OS DADOS DO FICHEIRO DEPOIS DE CONVERTER: ", lotes)
 	return lotes
 }

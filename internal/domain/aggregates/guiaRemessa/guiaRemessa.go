@@ -11,8 +11,8 @@ type GuiaRemessa struct {
 	dataExpedicao time.Time
 }
 
-func NewGuiaRemessa(id, pedidoID string, quantidade int) *GuiaRemessa {
-	return &GuiaRemessa{
+func NewGuiaRemessa(id, pedidoID string, quantidade int) GuiaRemessa {
+	return GuiaRemessa{
 		id:            id,
 		pedidoID:      pedidoID,
 		quantidade:    quantidade,
@@ -20,18 +20,18 @@ func NewGuiaRemessa(id, pedidoID string, quantidade int) *GuiaRemessa {
 	}
 }
 
-func (g *GuiaRemessa) GetID() string {
+func (g *GuiaRemessa) Id() string {
 	return g.id
 }
 
-func (g *GuiaRemessa) GetPedidoID() string {
+func (g *GuiaRemessa) PedidoID() string {
 	return g.pedidoID
 }
 
-func (g *GuiaRemessa) GetDataExpedicao() time.Time {
+func (g *GuiaRemessa) DataExpedicao() time.Time {
 	return g.dataExpedicao
 }
 
-func (g *GuiaRemessa) GetQuantidade() int {
+func (g *GuiaRemessa) Quantidade() int {
 	return g.quantidade
 }

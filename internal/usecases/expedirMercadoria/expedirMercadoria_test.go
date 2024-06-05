@@ -5,7 +5,6 @@ import (
 	"ACMELDA/internal/domain/entities/lote"
 	"ACMELDA/internal/domain/repository/guiaRemessaRepository"
 	expedirMercadoria "ACMELDA/internal/usecases/expedirMercadoria"
-	"fmt"
 	"testing"
 )
 
@@ -20,7 +19,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
 
 		// assert
-		if g.GetID() == "" {
+		if g.Id() == "" {
 			t.Fail()
 		}
 	})
@@ -33,21 +32,21 @@ func TestExpedirMercadoria(t *testing.T) {
 		r := guiaRemessaRepository.New()
 
 		// act
-		r.CriarGuia(g)
+		r.CriarGuia(&g)
 
 		// assert
-		if g.GetID() == "" {
+		if g.Id() == "" {
 			t.Fail()
 		}
 	})
 
-	t.Run("recuperar um agregado de guia remessa", func(t *testing.T) {
+	t.Run("recuperar um agregado de guia remessa no repositorio", func(t *testing.T) {
 		// arrange
 		pedidoID := "001"
 		quantidade := 100
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
 		r := guiaRemessaRepository.New()
-		r.CriarGuia(g)
+		r.CriarGuia(&g)
 
 		// act
 		gr, err := r.RecuperarGuia("g001")
@@ -58,6 +57,29 @@ func TestExpedirMercadoria(t *testing.T) {
 		}
 	})
 
+	t.Run("se criou mais de uma agregado de guia remessa", func(t *testing.T) {
+		// arrange
+		var guias []guiaRemessa.GuiaRemessa
+
+		guias = append(guias, guiaRemessa.NewGuiaRemessa("g001", "pedido123", 10))
+		guias = append(guias, guiaRemessa.NewGuiaRemessa("g002", "pedido456", 20))
+		guias = append(guias, guiaRemessa.NewGuiaRemessa("g003", "pedido789", 30))
+
+		r := guiaRemessaRepository.New()
+		for _, g := range guias {
+			r.CriarGuia(&g)
+		}
+
+		// act
+		tr := r.RecuperarTodasGuias()
+
+		//assert
+		if len(tr) == 0 {
+			t.Fail()
+		}
+
+	})
+
 	t.Run("se o produto for encontrado no lote", func(t *testing.T) {
 		// arrange
 		pedidoID := "003"
@@ -66,7 +88,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 
 		//act
-		p := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		p := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 
 		// assert
 		if len(p) == 0 {
@@ -83,7 +105,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 
 		// assert
 		if len(lotes) == 0 {
@@ -100,7 +122,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -117,7 +139,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -132,7 +154,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		l := lote.NewLote()
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -148,9 +170,9 @@ func TestExpedirMercadoria(t *testing.T) {
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
 		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
+		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
 		// assert
 		if lote == -1 {
@@ -166,9 +188,9 @@ func TestExpedirMercadoria(t *testing.T) {
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
 		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
+		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
 		// assert
 		if lote != -1 {
@@ -184,9 +206,9 @@ func TestExpedirMercadoria(t *testing.T) {
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
 		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 		//act
-		lote := l.RetirarProdutoNoLote(lotes, g.GetQuantidade())
+		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
 		// assert
 		if lote != -1 {
@@ -200,7 +222,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		quantidade := 199
 		g := guiaRemessa.NewGuiaRemessa("", "", 0)
 		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.GetPedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
 		//act
 		lote := l.RetirarProdutoNoLote(lotes, quantidade)
 
@@ -219,14 +241,12 @@ func TestExpedirMercadoria(t *testing.T) {
 		g := guiaRemessa.NewGuiaRemessa("g002", idProduto, quantidade)
 
 		// act
-		fmt.Println(" aiiiiii")
-		expedir.Executa(g)
-		fmt.Println(" aiiiiii")
-		/* assert
-		if expedir.Executa(g) {
-			fmt.Println(" aiiiiii")
+		r := expedir.Executa(&g)
+
+		// assert
+		if !r {
 			t.Fail()
-		}*/
+		}
 
 	})
 

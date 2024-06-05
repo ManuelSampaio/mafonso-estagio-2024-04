@@ -6,7 +6,7 @@ import (
 
 func DataValidadeProxima(data string) bool {
 	dataAtual := time.Now()
-	janelaTempo := 3 * 30 * 24 * time.Hour // Janela de tempo de 4 meses
+	janelaTempo := 3 * 30 * 24 * time.Hour // Janela de tempo de 3 meses
 
 	dataValidade, _ := time.Parse("2006-01-02", data)
 
