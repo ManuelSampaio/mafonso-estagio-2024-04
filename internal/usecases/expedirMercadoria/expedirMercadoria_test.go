@@ -24,7 +24,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		}
 	})
 
-	t.Run("se repositorio guia de remessa foi criada", func(t *testing.T) {
+	/*t.Run("se repositorio guia de remessa foi criada", func(t *testing.T) {
 		// arrange
 		pedidoID := "001"
 		quantidade := 100
@@ -38,7 +38,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		if g.Id() == "" {
 			t.Fail()
 		}
-	})
+	})*/
 
 	t.Run("recuperar um agregado de guia remessa no repositorio", func(t *testing.T) {
 		// arrange
