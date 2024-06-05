@@ -250,4 +250,21 @@ func TestExpedirMercadoria(t *testing.T) {
 
 	})
 
+	t.Run("expedir uma quantidade de mercadoria mais do que a existente no/s lote/s", func(t *testing.T) {
+		// arrange
+		expedir := expedirMercadoria.ExpedirMercadoria{}
+		idProduto := "003"
+		quantidade := 20000
+		g := guiaRemessa.NewGuiaRemessa("g002", idProduto, quantidade)
+
+		// act
+		r := expedir.Executa(&g)
+
+		// assert
+		if r {
+			t.Fail()
+		}
+
+	})
+
 }
