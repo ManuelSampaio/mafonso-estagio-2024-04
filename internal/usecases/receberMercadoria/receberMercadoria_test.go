@@ -110,6 +110,9 @@ func TestReceberMercadoria(t *testing.T) {
 	// depois de recebido o produto é armazenado (LOTES: Pratileira-Corredor-Armario)
 	// ao receber : terei o produto, depois irei colocar em uma nota de recebimento,
 	//depois recuperar essa nota (depois de criada, o produto é armazenado em lote)
+	// depois de armazenar no lote guardar em um ficheiro(txt, csv)
+	// pesquisar na arquitetura limpa, onde fica a classe que dados da bd?
 
 	// intergarar algumas funcionalidade
+
 }
