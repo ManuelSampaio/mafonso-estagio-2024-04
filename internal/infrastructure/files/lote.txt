@@ -32,3 +32,8 @@ Id: lt007
 Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
 Quantidade: 100,
 DataValidade: 2024-11-01
+
+Id: lt006
+Produto: {Id:003, Nome: pao3, DataValidade: 2024-06-01}
+Quantidade: 100,
+DataValidade: 2024-06-01

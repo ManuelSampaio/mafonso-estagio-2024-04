@@ -162,12 +162,6 @@ func TestReceberMercadoria(t *testing.T) {
 		}
 	})
 
-	/*
-		1- Nota de recebimento
-		2- lote em si 1.2 ( oque está no lote condiz com o que está na nota?)
-		3- armazenar em algum lugar
-	*/
-
 	t.Run("se recebeu a mercadoria e a nota de remessa foi criada", func(t *testing.T) {
 		//arrange
 		recebermercadori := recebermercadoria.ReceberMercadoria{}
