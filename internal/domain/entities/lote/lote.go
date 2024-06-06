@@ -19,11 +19,15 @@ type Lote struct {
 
 func New(i string, p produto.Produto, q int, d string) *Lote {
 	return &Lote{
-		id:           "",
-		produto:      produto.Produto{},
-		quantidade:   0,
-		dataValidade: "",
+		id:           i,
+		produto:      p,
+		quantidade:   q,
+		dataValidade: d,
 	}
+}
+
+func (l Lote) Id() string {
+	return l.id
 }
 
 func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {

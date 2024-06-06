@@ -120,7 +120,7 @@ func TestReceberMercadoria(t *testing.T) {
 	/*
 	  se ACME ao recber uma mercadoria, recebe já em lotes ou a própria acme organiza em lotes após receber?
 	*/
-	t.Run("armazenar mercadoria", func(t *testing.T) {
+	t.Run("receber mercadoria", func(t *testing.T) {
 		//arrange
 		var lot *lote.Lote
 		repo := notarecebimentorepository.New()
@@ -132,10 +132,14 @@ func TestReceberMercadoria(t *testing.T) {
 		//act
 		if tem, _ := repo.RecuperarNotaRecebimento(nota.Id()); tem.Id() != "" {
 			lot = lote.New("lt102", *produto, quantidade, produto.DataValidade())
+
 		}
-		fmt.Println(lot)
 
 		//assert
+		if lot.Id() == "" {
+			fmt.Println("FALHOU: ", lot)
+			t.Fail()
+		}
 	})
 
 }
