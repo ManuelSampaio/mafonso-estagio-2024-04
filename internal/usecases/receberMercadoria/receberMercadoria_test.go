@@ -5,7 +5,6 @@ import (
 	"ACMELDA/internal/domain/entities/lote"
 	"ACMELDA/internal/domain/entities/produto"
 	notarecebimentorepository "ACMELDA/internal/domain/repository/notaRecebimentoRepository"
-	"fmt"
 	"testing"
 )
 
@@ -120,7 +119,7 @@ func TestReceberMercadoria(t *testing.T) {
 	/*
 	  se ACME ao recber uma mercadoria, recebe já em lotes ou a própria acme organiza em lotes após receber?
 	*/
-	t.Run("receber mercadoria", func(t *testing.T) {
+	t.Run("verificar se há produto no lote", func(t *testing.T) {
 		//arrange
 		var lot *lote.Lote
 		repo := notarecebimentorepository.New()
@@ -136,8 +135,8 @@ func TestReceberMercadoria(t *testing.T) {
 		}
 
 		//assert
-		if lot.Id() == "" {
-			fmt.Println("FALHOU: ", lot)
+		if lot.ProdutoId() == "" {
+			//fmt.Println("FALHOU: ", lot)
 			t.Fail()
 		}
 	})
