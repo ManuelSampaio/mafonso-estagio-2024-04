@@ -9,7 +9,7 @@ type NotaRecebimentoRepository struct {
 	notasRecebimento map[string]*notarecebimento.NotaRecebimento
 }
 
-func New() *NotaRecebimentoRepository {
+func (n NotaRecebimentoRepository) New() *NotaRecebimentoRepository {
 	return &NotaRecebimentoRepository{notasRecebimento: make(map[string]*notarecebimento.NotaRecebimento)}
 
 }

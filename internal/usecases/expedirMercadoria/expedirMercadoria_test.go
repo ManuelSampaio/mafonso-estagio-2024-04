@@ -25,28 +25,12 @@ func TestExpedirMercadoria(t *testing.T) {
 		}
 	})
 
-	/*t.Run("se repositorio guia de remessa foi criada", func(t *testing.T) {
-		// arrange
-		pedidoID := "001"
-		quantidade := 100
-		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		r := guiaRemessaRepository.New()
-
-		// act
-		r.CriarGuia(&g)
-
-		// assert
-		if g.Id() == "" {
-			t.Fail()
-		}
-	})*/
-
 	t.Run("recuperar um agregado de guia remessa no repositorio", func(t *testing.T) {
 		// arrange
 		pedidoID := "001"
 		quantidade := 100
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		r := guiaRemessaRepository.New()
+		r := guiaRemessaRepository.GuiaRemessaRepository{}.New()
 		r.CriarGuia(&g)
 
 		// act
@@ -58,7 +42,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		}
 	})
 
-	t.Run("se criou mais de uma agregado de guia remessa", func(t *testing.T) {
+	t.Run("se criou mais de um agregado de guia remessa", func(t *testing.T) {
 		// arrange
 		var guias []guiaRemessa.GuiaRemessa
 
@@ -66,7 +50,7 @@ func TestExpedirMercadoria(t *testing.T) {
 		guias = append(guias, guiaRemessa.NewGuiaRemessa("g002", "pedido456", 20))
 		guias = append(guias, guiaRemessa.NewGuiaRemessa("g003", "pedido789", 30))
 
-		r := guiaRemessaRepository.New()
+		r := guiaRemessaRepository.GuiaRemessaRepository{}.New()
 		for _, g := range guias {
 			r.CriarGuia(&g)
 		}

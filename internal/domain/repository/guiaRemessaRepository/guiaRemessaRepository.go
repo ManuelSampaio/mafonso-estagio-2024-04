@@ -9,7 +9,7 @@ type GuiaRemessaRepository struct {
 	guias map[string]*guiaRemessa.GuiaRemessa
 }
 
-func New() *GuiaRemessaRepository {
+func (r GuiaRemessaRepository) New() *GuiaRemessaRepository {
 	return &GuiaRemessaRepository{guias: make(map[string]*guiaRemessa.GuiaRemessa)}
 }
 

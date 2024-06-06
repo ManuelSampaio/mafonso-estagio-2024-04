@@ -5,6 +5,7 @@ import (
 	"ACMELDA/internal/domain/entities/lote"
 	"ACMELDA/internal/domain/entities/produto"
 	notarecebimentorepository "ACMELDA/internal/domain/repository/notaRecebimentoRepository"
+	recebermercadoria "ACMELDA/internal/usecases/receberMercadoria"
 	"testing"
 )
 
@@ -58,7 +59,7 @@ func TestReceberMercadoria(t *testing.T) {
 		validade := "2024-07-21"
 
 		n := notarecebimento.New(id, produtoID, Quantidade, validade)
-		repo := notarecebimentorepository.New()
+		repo := notarecebimentorepository.NotaRecebimentoRepository{}.New()
 		repo.CriarNotaRecebimento(&n)
 
 		// act
@@ -75,7 +76,7 @@ func TestReceberMercadoria(t *testing.T) {
 	t.Run("se criou mais de um agregado no repositorio da nota de recebimento", func(t *testing.T) {
 		//arrange
 		var notasRecebimento []notarecebimento.NotaRecebimento
-		repo := notarecebimentorepository.New()
+		repo := notarecebimentorepository.NotaRecebimentoRepository{}.New()
 
 		notasRecebimento = append(notasRecebimento, notarecebimento.New("n001", "002", 1672, "2025-02-11"))
 		notasRecebimento = append(notasRecebimento, notarecebimento.New("n001", "005", 1432, "2025-03-21"))
@@ -122,7 +123,7 @@ func TestReceberMercadoria(t *testing.T) {
 	t.Run("verificar se há produto no lote", func(t *testing.T) {
 		//arrange
 		var lot *lote.Lote
-		repo := notarecebimentorepository.New()
+		repo := notarecebimentorepository.NotaRecebimentoRepository{}.New()
 		produto := produto.New("23", "arroz", "2024-08-12")
 		quantidade := 100
 		nota := notarecebimento.New("nt003", produto.Id(), quantidade, produto.DataValidade())
@@ -143,7 +144,7 @@ func TestReceberMercadoria(t *testing.T) {
 	t.Run("verificar se os dados do produto que está na nota de recebimento é igual com os dados do produto que está no lote", func(t *testing.T) {
 		//arrange
 		dadosIguais := false
-		repo := notarecebimentorepository.New()
+		repo := notarecebimentorepository.NotaRecebimentoRepository{}.New()
 		produto := produto.New("23", "arroz", "2024-08-12")
 		quantidade := 100
 		nota := notarecebimento.New("nt003", produto.Id(), quantidade, produto.DataValidade())
@@ -166,5 +167,22 @@ func TestReceberMercadoria(t *testing.T) {
 		2- lote em si 1.2 ( oque está no lote condiz com o que está na nota?)
 		3- armazenar em algum lugar
 	*/
+
+	t.Run("armazenar", func(t *testing.T) {
+		//arrange
+		recebermercadori := recebermercadoria.ReceberMercadoria{}
+		produto := produto.New("23", "arroz", "2024-08-12")
+		quantidade := 100
+		nota := notarecebimento.New("nt003", produto.Id(), quantidade, produto.DataValidade())
+
+		//act
+		d := recebermercadori.Receber(&nota)
+
+		// assert
+
+		if !d {
+			t.Fail()
+		}
+	})
 
 }
