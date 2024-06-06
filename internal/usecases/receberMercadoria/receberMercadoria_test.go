@@ -140,4 +140,31 @@ func TestReceberMercadoria(t *testing.T) {
 		}
 	})
 
+	t.Run("verificar se os dados do produto que está na nota de recebimento é igual com os dados do produto que está no lote", func(t *testing.T) {
+		//arrange
+		dadosIguais := false
+		repo := notarecebimentorepository.New()
+		produto := produto.New("23", "arroz", "2024-08-12")
+		quantidade := 100
+		nota := notarecebimento.New("nt003", produto.Id(), quantidade, produto.DataValidade())
+		repo.CriarNotaRecebimento(&nota)
+		lot := lote.New("lt102", *produto, quantidade, produto.DataValidade())
+		//act
+		if tem, _ := repo.RecuperarNotaRecebimento(nota.Id()); tem.Id() != "" && tem.ProdutoID() == lot.ProdutoId() && tem.Quantidade() == lot.Quantidade() {
+			dadosIguais = true
+
+		}
+
+		//assert
+		if !dadosIguais {
+			t.Fail()
+		}
+	})
+
+	/*
+		1- Nota de recebimento
+		2- lote em si 1.2 ( oque está no lote condiz com o que está na nota?)
+		3- armazenar em algum lugar
+	*/
+
 }

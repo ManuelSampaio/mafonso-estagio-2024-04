@@ -34,6 +34,10 @@ func (l Lote) ProdutoId() string {
 	return l.produto.Id()
 }
 
+func (l Lote) Quantidade() int {
+	return l.quantidade
+}
+
 func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 	Dadoslotes := l.lerDadosArquivo()
 	lotes := l.converteEmStruct(Dadoslotes)
