@@ -136,7 +136,6 @@ func TestReceberMercadoria(t *testing.T) {
 
 		//assert
 		if lot.ProdutoId() == "" {
-			//fmt.Println("FALHOU: ", lot)
 			t.Fail()
 		}
 	})
