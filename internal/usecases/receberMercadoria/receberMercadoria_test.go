@@ -2,7 +2,10 @@ package recebermercadoria_test
 
 import (
 	notarecebimento "ACMELDA/internal/domain/aggregates/notaRecebimento"
+	"ACMELDA/internal/domain/entities/lote"
+	"ACMELDA/internal/domain/entities/produto"
 	notarecebimentorepository "ACMELDA/internal/domain/repository/notaRecebimentoRepository"
+	"fmt"
 	"testing"
 )
 
@@ -114,5 +117,25 @@ func TestReceberMercadoria(t *testing.T) {
 	// pesquisar na arquitetura limpa, onde fica a classe ou entidade que lê os dados da bd ou de um arquivo txt que está na pasta infrastruct?
 
 	// intergarar algumas funcionalidade
+	/*
+	  se ACME ao recber uma mercadoria, recebe já em lotes ou a própria acme organiza em lotes após receber?
+	*/
+	t.Run("armazenar mercadoria", func(t *testing.T) {
+		//arrange
+		var lot *lote.Lote
+		repo := notarecebimentorepository.New()
+		produto := produto.New("23", "arroz", "2024-08-12")
+		quantidade := 100
+		nota := notarecebimento.New("nt003", produto.Id(), quantidade, produto.DataValidade())
+		repo.CriarNotaRecebimento(&nota)
+
+		//act
+		if tem, _ := repo.RecuperarNotaRecebimento(nota.Id()); tem.Id() != "" {
+			lot = lote.New("lt102", *produto, quantidade, produto.DataValidade())
+		}
+		fmt.Println(lot)
+
+		//assert
+	})
 
 }

@@ -11,18 +11,18 @@ import (
 )
 
 type Lote struct {
-	Id           string
-	Produto      produto.Produto
-	Quantidade   int
-	DataValidade string
+	id           string
+	produto      produto.Produto
+	quantidade   int
+	dataValidade string
 }
 
-func NewLote() *Lote {
+func New(i string, p produto.Produto, q int, d string) *Lote {
 	return &Lote{
-		Id:           "",
-		Produto:      produto.Produto{},
-		Quantidade:   0,
-		DataValidade: "",
+		id:           "",
+		produto:      produto.Produto{},
+		quantidade:   0,
+		dataValidade: "",
 	}
 }
 
@@ -32,10 +32,10 @@ func (l Lote) EncontraProdutoEmUmOuMaisLotes(idproduto string) []Lote {
 	var loteaulixiar []Lote
 
 	for _, lote := range lotes {
-		auxiliar1, _ := strconv.Atoi(lote.Produto.GetId())
+		auxiliar1, _ := strconv.Atoi(lote.produto.Id())
 		auxiliar2, _ := strconv.Atoi(idproduto)
 
-		if auxiliar1 == auxiliar2 && DataValidadeProxima(lote.DataValidade) {
+		if auxiliar1 == auxiliar2 && DataValidadeProxima(lote.dataValidade) {
 			loteaulixiar = append(loteaulixiar, lote)
 		}
 
@@ -50,13 +50,13 @@ func (l Lote) RetirarProdutoNoLote(lotes []Lote, quantidade int) int {
 	unidadeSubstituta := quantidade
 
 	for _, lote := range lotes {
-		if lote.Quantidade >= unidadeSubstituta && unidadeSubstituta > 0 {
-			lote.Quantidade = lote.Quantidade - unidadeSubstituta
-			return lote.Quantidade
+		if lote.quantidade >= unidadeSubstituta && unidadeSubstituta > 0 {
+			lote.quantidade = lote.quantidade - unidadeSubstituta
+			return lote.quantidade
 
-		} else if lote.Quantidade <= unidadeSubstituta && unidadeSubstituta > 0 {
-			unidadeSubstituta = unidadeSubstituta - lote.Quantidade
-			lote.Quantidade -= lote.Quantidade
+		} else if lote.quantidade <= unidadeSubstituta && unidadeSubstituta > 0 {
+			unidadeSubstituta = unidadeSubstituta - lote.quantidade
+			lote.quantidade -= lote.quantidade
 		}
 	}
 
@@ -114,19 +114,19 @@ func (l Lote) converteEmStruct(dados string) []Lote {
 				if len(campos) == 2 {
 					switch campos[0] {
 					case "Id":
-						lote.Id = campos[1]
+						lote.id = campos[1]
 					case "Produto":
 						produtoCampos := strings.Split(campos[1], ", ")
 						produtoId, _ := strconv.Atoi(produtoCampos[0][4:])
 						produtoNome := produtoCampos[1][6:]
 						dataValidadeProduto := produtoCampos[2][14:]
-						lote.Produto = *produto.New(strconv.Itoa(produtoId), produtoNome, strings.Replace(dataValidadeProduto, "}", "", 1))
+						lote.produto = *produto.New(strconv.Itoa(produtoId), produtoNome, strings.Replace(dataValidadeProduto, "}", "", 1))
 
 					case "Quantidade":
-						lote.Quantidade, _ = strconv.Atoi(strings.Replace(campos[1], ",", "", 1))
+						lote.quantidade, _ = strconv.Atoi(strings.Replace(campos[1], ",", "", 1))
 
 					case "DataValidade":
-						lote.DataValidade = campos[1]
+						lote.dataValidade = campos[1]
 					}
 				}
 			}

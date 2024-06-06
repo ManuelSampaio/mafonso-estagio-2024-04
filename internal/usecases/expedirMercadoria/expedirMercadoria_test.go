@@ -3,6 +3,7 @@ package expedirMercadoria_test
 import (
 	"ACMELDA/internal/domain/aggregates/guiaRemessa"
 	"ACMELDA/internal/domain/entities/lote"
+	"ACMELDA/internal/domain/entities/produto"
 	"ACMELDA/internal/domain/repository/guiaRemessaRepository"
 	expedirMercadoria "ACMELDA/internal/usecases/expedirMercadoria"
 	"testing"
@@ -82,13 +83,13 @@ func TestExpedirMercadoria(t *testing.T) {
 
 	t.Run("se o produto for encontrado no lote", func(t *testing.T) {
 		// arrange
-		pedidoID := "003"
+		produtoID := "003"
 		quantidade := 100
-		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		l := lote.NewLote()
+		g := guiaRemessa.NewGuiaRemessa("g001", produtoID, quantidade)
+		l := lote.New("", produto.Produto{}, 0, "")
 
 		//act
-		p := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		p := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 
 		// assert
 		if len(p) == 0 {
@@ -102,10 +103,9 @@ func TestExpedirMercadoria(t *testing.T) {
 		pedidoID := "003"
 		quantidade := 30
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		l := lote.NewLote()
-
+		l := lote.New("", produto.Produto{}, 0, "")
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 
 		// assert
 		if len(lotes) == 0 {
@@ -119,10 +119,10 @@ func TestExpedirMercadoria(t *testing.T) {
 		pedidoID := "001"
 		quantidade := 30
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		l := lote.NewLote()
+		l := lote.New("", produto.Produto{}, 0, "")
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -136,10 +136,10 @@ func TestExpedirMercadoria(t *testing.T) {
 		pedidoID := "103"
 		quantidade := 0
 		g := guiaRemessa.NewGuiaRemessa("g001", pedidoID, quantidade)
-		l := lote.NewLote()
+		l := lote.New("", produto.Produto{}, 0, "")
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -151,10 +151,10 @@ func TestExpedirMercadoria(t *testing.T) {
 	t.Run("encontrar produto em lotes sem dados da guia de remessa", func(t *testing.T) {
 		// arrange
 		g := guiaRemessa.NewGuiaRemessa("", "", 0)
-		l := lote.NewLote()
+		l := lote.New("", produto.Produto{}, 0, "")
 
 		//act
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 
 		// assert
 		if len(lotes) > 0 {
@@ -169,8 +169,8 @@ func TestExpedirMercadoria(t *testing.T) {
 		quantidade := 1200
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
-		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		l := lote.New("", produto.Produto{}, 0, "")
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 		//act
 		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
@@ -187,8 +187,8 @@ func TestExpedirMercadoria(t *testing.T) {
 		quantidade := 2900
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
-		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		l := lote.New("", produto.Produto{}, 0, "")
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 		//act
 		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
@@ -205,8 +205,8 @@ func TestExpedirMercadoria(t *testing.T) {
 		quantidade := 900
 
 		g := guiaRemessa.NewGuiaRemessa("g045", produtoID, quantidade)
-		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		l := lote.New("", produto.Produto{}, 0, "")
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 		//act
 		lote := l.RetirarProdutoNoLote(lotes, g.Quantidade())
 
@@ -221,8 +221,8 @@ func TestExpedirMercadoria(t *testing.T) {
 		// arrange
 		quantidade := 199
 		g := guiaRemessa.NewGuiaRemessa("", "", 0)
-		l := lote.NewLote()
-		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+		l := lote.New("", produto.Produto{}, 0, "")
+		lotes := l.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 		//act
 		lote := l.RetirarProdutoNoLote(lotes, quantidade)
 

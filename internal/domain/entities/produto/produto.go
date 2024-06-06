@@ -2,18 +2,22 @@ package produto
 
 type Produto struct {
 	id           string
-	nome         string
+	descricao    string
 	dataValidade string
 }
 
-func New(i, n, d string) *Produto {
+func New(i, dc, d string) *Produto {
 	return &Produto{
 		id:           i,
-		nome:         n,
+		descricao:    dc,
 		dataValidade: d,
 	}
 }
 
-func (p Produto) GetId() string {
+func (p Produto) Id() string {
 	return p.id
+}
+
+func (p Produto) DataValidade() string {
+	return p.dataValidade
 }

@@ -10,7 +10,7 @@ type ExpedirMercadoria struct {
 }
 
 func (e ExpedirMercadoria) Executa(g *guiaRemessa.GuiaRemessa) bool {
-	lotes := e.lote.EncontraProdutoEmUmOuMaisLotes(g.PedidoID())
+	lotes := e.lote.EncontraProdutoEmUmOuMaisLotes(g.ProdutoID())
 	retirou := e.lote.RetirarProdutoNoLote(lotes, g.Quantidade())
 
 	return retirou != -1

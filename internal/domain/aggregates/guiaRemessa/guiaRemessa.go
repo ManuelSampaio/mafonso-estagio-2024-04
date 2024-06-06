@@ -6,16 +6,16 @@ import (
 
 type GuiaRemessa struct {
 	id            string
-	pedidoID      string
+	produtoID     string
 	quantidade    int
 	dataExpedicao time.Time
 }
 
-func NewGuiaRemessa(id, pedidoID string, quantidade int) GuiaRemessa {
+func NewGuiaRemessa(i, pi string, q int) GuiaRemessa {
 	return GuiaRemessa{
-		id:            id,
-		pedidoID:      pedidoID,
-		quantidade:    quantidade,
+		id:            i,
+		produtoID:     pi,
+		quantidade:    q,
 		dataExpedicao: time.Now(),
 	}
 }
@@ -24,8 +24,8 @@ func (g *GuiaRemessa) Id() string {
 	return g.id
 }
 
-func (g *GuiaRemessa) PedidoID() string {
-	return g.pedidoID
+func (g *GuiaRemessa) ProdutoID() string {
+	return g.produtoID
 }
 
 func (g *GuiaRemessa) DataExpedicao() time.Time {
