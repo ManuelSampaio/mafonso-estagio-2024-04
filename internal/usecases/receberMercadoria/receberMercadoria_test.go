@@ -168,7 +168,7 @@ func TestReceberMercadoria(t *testing.T) {
 		3- armazenar em algum lugar
 	*/
 
-	t.Run("armazenar", func(t *testing.T) {
+	t.Run("se recebeu a mercadoria e a nota de remessa foi criada", func(t *testing.T) {
 		//arrange
 		recebermercadori := recebermercadoria.ReceberMercadoria{}
 		produto := produto.New("23", "arroz", "2024-08-12")
