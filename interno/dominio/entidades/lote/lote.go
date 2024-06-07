@@ -91,7 +91,7 @@ func (l Lote) lerDadosArquivo() string {
 	}()
 
 	nomeArquivo := "lote.txt"
-	novoDir := filepath.Join(dir, "..", "..", "infrastructura", "ficheiros")
+	novoDir := filepath.Join(dir, "..", "..", "interno", "infrastructura", "ficheiros")
 	err = os.Chdir(novoDir)
 
 	if err != nil {

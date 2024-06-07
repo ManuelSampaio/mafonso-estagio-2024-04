@@ -18,9 +18,8 @@ func (e ExpedirMercadoria) Executa(g *guiaremessa.GuiaRemessa) bool {
 
 	if retirou != -1 {
 		guia.CriarGuia(g)
-		if existe, _ := guia.RecuperarGuia(g.Id()); existe.Id() != "" {
-			return true
-		}
+		return true
+
 	}
 
 	return false
