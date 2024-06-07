@@ -5,19 +5,19 @@ import (
 	"errors"
 )
 
-type GuiaRemessaRepository struct {
+type GuiaRemessaRepositorio struct {
 	guias map[string]*guiaRemessa.GuiaRemessa
 }
 
-func (r GuiaRemessaRepository) New() *GuiaRemessaRepository {
-	return &GuiaRemessaRepository{guias: make(map[string]*guiaRemessa.GuiaRemessa)}
+func (r GuiaRemessaRepositorio) New() *GuiaRemessaRepositorio {
+	return &GuiaRemessaRepositorio{guias: make(map[string]*guiaRemessa.GuiaRemessa)}
 }
 
-func (r *GuiaRemessaRepository) CriarGuia(g *guiaRemessa.GuiaRemessa) {
+func (r *GuiaRemessaRepositorio) CriarGuia(g *guiaRemessa.GuiaRemessa) {
 	r.guias[g.Id()] = g
 }
 
-func (r *GuiaRemessaRepository) RecuperarGuia(id string) (*guiaRemessa.GuiaRemessa, error) {
+func (r *GuiaRemessaRepositorio) RecuperarGuia(id string) (*guiaRemessa.GuiaRemessa, error) {
 	g, existe := r.guias[id]
 	if !existe {
 		return nil, errors.New("guia de remessa não encontrada")
@@ -25,7 +25,7 @@ func (r *GuiaRemessaRepository) RecuperarGuia(id string) (*guiaRemessa.GuiaRemes
 	return g, nil
 }
 
-func (r *GuiaRemessaRepository) RecuperarTodasGuias() []*guiaRemessa.GuiaRemessa {
+func (r *GuiaRemessaRepositorio) RecuperarTodasGuias() []*guiaRemessa.GuiaRemessa {
 	var todasGuias []*guiaRemessa.GuiaRemessa
 	for _, guia := range r.guias {
 		todasGuias = append(todasGuias, guia)
