@@ -1,7 +1,7 @@
 
 ### Empresa Acme, Lda
 
-# Menbros do grupo
+# Membros do grupo
 1. Manuel Afonso
 2. Novais David
 
