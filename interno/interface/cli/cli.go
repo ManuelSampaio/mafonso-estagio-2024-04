@@ -1,9 +1,10 @@
 package cli
 
 import (
+	"ACMELDA/interno/interface/servicos"
 	"fmt"
 	"os"
-	"ACMELDA/interno/interface/servicos"
+
 	"github.com/spf13/cobra"
 )
 
@@ -24,9 +25,6 @@ func Cli() {
 				fmt.Println("Por favor especifique a quantidade a expedir")
 				return
 			}
-
-			fmt.Println("o id do produto: ", idProduto)
-			fmt.Println("a quantidade: ", quantidade)
 			servicos.ExpedirMercadoria(idProduto, quantidade)
 		},
 	}
