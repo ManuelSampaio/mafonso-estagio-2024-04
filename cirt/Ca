@@ -1,0 +1,49 @@
+Cálculo do Salário Base:
+
+Implementar a lógica para calcular o salário base de um funcionário, considerando remunerações periódicas ou ocasionais.
+Aplicação de Descontos por Faltas:
+
+Desenvolver a funcionalidade para aplicar descontos no salário base quando um funcionário tem faltas não justificadas.
+Cálculo do Salário Líquido:
+
+Implementar a lógica para calcular o salário líquido de um funcionário após aplicação de descontos de faltas, adicionando eventuais subsídios ou prémios.
+Determinação do Grupo de Tributação:
+
+Identificar o grupo de tributação ao qual o funcionário pertence (Grupo A, B, ou C) com base nas suas características de emprego ou atividade profissional.
+Cálculo do Imposto sobre Rendimentos do Trabalho (IRT):
+
+Implementar a lógica para calcular o IRT com base no salário líquido, aplicando as taxas correspondentes conforme o grupo de tributação do funcionário.
+Validação de Regras de Negócio:
+
+Implementar testes que validem as regras de negócio relacionadas ao cálculo do IRT, garantindo que os valores calculados estejam de acordo com a legislação fiscal vigente.
+Integração com Repositório de Dados (opcional):
+
+Integrar com um repositório de dados para armazenar informações sobre funcionários, salários e históricos de cálculos de impostos, seguindo os princípios de arquitetura limpa.
+
+___________________________________________________________
+
+Cálculo do Salário Base:
+
+Evento: Inicia o processo de cálculo do salário base para um funcionário.
+Ação: Consulta as remunerações definidas para o funcionário.
+Resultado: Calcula o valor total do salário base.
+Aplicação de Descontos por Faltas:
+
+Evento: Recebe informações sobre as faltas do funcionário.
+Ação: Aplica descontos proporcionais ao número de faltas não justificadas.
+Resultado: Reduz o valor do salário base conforme o número de faltas.
+Cálculo do Salário Líquido:
+
+Evento: Processa o salário base já descontado pelas faltas.
+Ação: Adiciona eventuais subsídios, prémios ou outras remunerações acessórias.
+Resultado: Calcula o valor final do salário líquido do funcionário.
+Determinação do Grupo de Tributação:
+
+Evento: Identifica as características do emprego ou atividade do funcionário.
+Ação: Classifica o funcionário em um dos grupos de tributação (A, B ou C).
+Resultado: Define o grupo de tributação para aplicação das taxas de IRT.
+Cálculo do Imposto sobre Rendimentos do Trabalho (IRT):
+
+Evento: Recebe o salário líquido e o grupo de tributação do funcionário.
+Ação: Calcula o valor do imposto com base nas taxas correspondentes ao grupo de tributação.
+Resultado: Determina o montante do IRT a ser pago pelo funcionário.
