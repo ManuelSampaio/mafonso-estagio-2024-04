@@ -1,12 +1,8 @@
-
 package application
 
 
-type CalculoSalarioService struct {
-	
-}
-
-
-func (s *CalculoSalarioService) CalcularSalarioBase(salarioBase float64) float64 {
-	return salarioBase 
+func CalcularSalarioComFaltas(salarioBase float64, faltas int) float64 {
+    
+    salarioReduzido := salarioBase - float64(faltas)*50.0
+    return salarioReduzido
 }
